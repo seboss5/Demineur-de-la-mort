@@ -1,0 +1,213 @@
+
+<html>
+<head>
+
+<title> Bienvenue au Démineur de la mort </title> 
+
+</head>
+
+<body>
+
+<script language="javascript">
+
+function verifiechamp(){
+
+vt = document.form.t.value;
+vnm =document.getElementById("nm").value;
+	if(isNaN(vt) || isNaN(vnm) ){
+		alert("le champ saisi ne correspond pas à un nombre ");	
+	return false ;	
+	}
+	else {
+	vt=parseFloat(vt) ;
+	vnm=parseFloat(vnm);
+		if(!Number.isInteger(vt)||!Number.isInteger(vnm)){
+			alert("N'EST PAS UN ENTIER");
+		return false ;
+		}
+		else{
+			
+
+		var rt=Math.sqrt(vt);
+
+ 			if (Number.isInteger(rt)==false){
+				alert("La taille de grille n'est pas un carré");
+			return false ;
+			}
+			if (vt<=vnm){
+				alert("le nombre de mines est plus grand que le taille");
+			return false ; 
+			}
+
+		}
+	}
+return true ;
+
+}
+
+
+	function toucheTaille(){
+		if(document.getElementById("t").focus){
+			document.getElementById("taille").innerHTML="* Entrez un entier carree" ;
+			document.getElementById("nombredemines").innerHTML="" ;
+		}
+	}
+
+
+
+	function toucheNM(){
+		if(document.hasFocus()){
+			//if(document.form.nm.value==""){
+			
+			document.getElementById("nombredemines").innerHTML="* Entrez un entier inferieur a la taille" ;
+			document.getElementById("taille").innerHTML="";	
+			//}
+			//else{
+			//			alert("if");
+			//			document.getElementById("nombredemines").innerHTML="" ;
+			//}
+		}
+	}
+
+
+
+	function vidernm(){
+	if(document.form.nm.value==""){
+		document.getElementById("nombredemines").innerHTML="* Entrez un entier inferieur a la taille" ;
+	}
+	else{
+		document.getElementById("nombredemines").innerHTML="" ;
+	}
+		
+	}
+
+
+
+	function vidert(){
+	if(document.form.t.value==""){
+		document.getElementById("taille").innerHTML="* Entrez un entier carree" ;
+	}
+	else{
+		document.getElementById("taille").innerHTML="" ;
+	}
+	}
+	
+
+	function afficher() {
+		document.getElementById("a").src="tf.jpg";
+	}
+	
+
+
+
+	function niveau(){
+	if(verifiechamp()==true){
+		var vt=parseInt(document.getElementById("t").value) ;
+		var vnm=parseInt(document.getElementById("nm").value);
+		var rvt=Math.sqrt(vt);
+		if(vt>=25){
+			if(vnm==vt-rvt){document.getElementById("a").src="td.jpg";}
+			if(vnm==vt-rvt-rvt){document.getElementById("a").src="d.jpg";}
+			if(vnm==vt-rvt-rvt-rvt){document.getElementById("a").src="m.jpg";}
+			if(vnm==vt-rvt-rvt-rvt-rvt){document.getElementById("a").src="f.jpg";}
+			if(vnm==vt-rvt-rvt-rvt-rvt-rvt){document.getElementById("a").src="tf.jpg";}
+		}
+		if(vt==16||vt==9){
+			if(vnm==8){document.getElementById("a").src="td.jpg";}
+			if(vnm==6){document.getElementById("a").src="d.jpg";}
+			if(vnm==4){document.getElementById("a").src="m.jpg";}
+			if(vnm==2){document.getElementById("a").src="f.jpg";}
+			if(vnm==1){document.getElementById("a").src="tf.jpg";}
+		}
+		if(vt==4){
+			if(vnm==3){document.getElementById("a").src="td.jpg";}
+			if(vnm==2){document.getElementById("a").src="d.jpg";}
+			if(vnm==1){document.getElementById("a").src="m.jpg";}
+			if(vnm==0){document.getElementById("a").src="f.jpg";}
+		}
+	}
+	}
+
+			
+
+
+
+</script>
+<style>
+
+
+body {
+background-color: #FFFFFF;
+text-align:center;
+background-repeat:no-repeat;
+background-position:top;
+background-size:1500px 800px;
+}
+p{
+margin-top:450px;
+margin-right:280px;
+}
+
+.tableau{
+text-align:center;
+margin-left:390px;
+}
+#taille{
+font-family:"courier";
+font-size:13px;
+color:#FF0000;
+}
+#nombredemines{
+font-family:"courier";
+color:#FF0000;
+font-size:13px;
+}
+#myImage{
+margin-top:350px;
+height:100px;
+}
+th,h1{
+font-family:"courier";
+font-weight:bold;
+}
+h1{
+color:#808080;
+}
+.tableau2{
+text-align:bottom;
+}
+li{
+list-style-type:none;
+}
+#a{
+margin-right:200px;
+margin-left:60px;
+width:340px;
+height:300px;
+}
+
+</style>
+
+<h1> Bienvenue au Demineur de la mort </h1> 
+
+<table class="tableau">
+<form name="form" action="Test.html" >
+<tr><th>Taille         </th><td>:</td><td> <input id="t"  type="text" onclick="toucheTaille()" onkeypress="vidert()"size="30" name="t" / > </td> </tr>
+<tr><th> </th><td> </td><td id="taille"></td></tr>
+
+<tr><th>Nombre de mines</th><td>:</td><td><input id="nm"  type="text" onclick="toucheNM()" onkeypress="vidernm()" size="30" name="nm"/> </td></tr>
+<tr><th> </th><td> </td><td id="nombredemines"></td></tr>
+
+<tr><th> </th><td> </td> <td><input type="button" id="c" onclick="if (verifiechamp()==true) form.submit()" value="Commencer" /><input type="button"   value="Annuler" /></td></tr> 
+
+</form>
+</table>
+<ul class="tableau2" >
+<li><input id="vn" type="button" value="Votre niveau choisi"  onclick="niveau()" /> </li><br/>
+<li> <img id="a" src="image.png"></li>
+</ul>
+
+
+</body> 
+
+</html>
